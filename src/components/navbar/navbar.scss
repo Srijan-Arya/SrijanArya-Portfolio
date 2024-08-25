@@ -1,0 +1,25 @@
+.navbar{
+    // border:2px solid magenta;
+    max-width: 85%;
+    margin: 0px auto;
+    padding: 10px;
+    .wrapper{
+        display: flex;
+        height: 100%;
+        // border: 2px solid red;
+        align-items: center;
+        justify-content: space-between;
+        span{
+            img{
+                width: 80%;
+            }
+        }
+        .social{
+            img{
+                width: 30px;
+                height: 30px;
+                margin: 0px 5px;
+            }
+        }
+    }
+}

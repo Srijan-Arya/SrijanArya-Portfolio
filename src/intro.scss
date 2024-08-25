@@ -1,0 +1,122 @@
+@import 'global';
+.wrapper{
+
+    height: 100vh;
+    margin: auto;
+    overflow: hidden;
+    .intro_container{
+        max-width: 85%;
+        margin: 40px auto;
+
+        // border: 2px solid red;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        .info{
+            width: 100%;
+            // border: 2px solid cyan;
+            margin: auto;
+            text-align: center;
+            h2{
+                font-size: 70px;
+                font-family: 'arcade', sans-serif;
+            }
+            p{
+                margin-top: 30px;
+                font-family: 'orangy', sans-serif;
+                font-size: 2rem;
+            }
+        button{
+            cursor: pointer;
+            // border: 2px solid green;
+            // padding: 0 5px;
+            width: 250px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 35px auto;
+            border-radius: 12px;
+            box-shadow: 1px 1px 1px white;
+            img{
+                // border: 2px solid red;
+                width: 60px;
+                height: 60px;
+                transition: all 0.3s ease;
+            }
+            
+            span{
+                // border: 2px solid green;
+                text-align: center;
+                font-family: 'orangy', sans-serif;
+                font-size: 1.2rem;
+            }
+            
+            &:hover img {
+                animation: float 1.3s infinite step-start;
+            }
+            &:hover span{
+                color:rgb(136, 133, 133);
+            }
+            
+        }
+    
+        @keyframes float {
+            0% {
+              transform: translateY(0);
+            }
+            25% {
+              transform: translateY(3px);
+            }
+            50% {
+              transform: translateY(0);
+            }
+            75% {
+              transform: translateY(-3px);
+            }
+            100% {
+              transform: translateY(0);
+            }
+            
+        }
+          
+        
+        
+        
+        }
+        .skills{
+            // border: 2px solid magenta;
+            width: 100%;
+            h2{
+                font-family: 'orangy', sans-serif;
+                font-size: 3rem;
+                // border: 2px solid burlywood;
+                text-align: center;
+            }
+            img{
+                display: block;
+                width: 100%;
+                margin: auto;
+                // margin-left: 20px;
+                // border: 2px solid firebrick;
+                
+            }
+        }
+    }
+    .bg-text{
+        position: relative;
+        bottom: 150px;
+        // border: 2px solid green;
+        white-space: nowrap;
+        ul{
+            display: flex;
+            list-style-type: none;
+            li{
+                opacity: 0.1;
+                margin: 0 32px;
+                font-size: 8rem;
+                font-family: 'arcade', sans-serif;
+            }
+        }
+    }
+}

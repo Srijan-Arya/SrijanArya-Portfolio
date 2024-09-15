@@ -35,6 +35,20 @@ section {
     overflow: hidden;
 }
 
+/* Spinner Styles */
+.spinner-container {
+    position: fixed;  /* Fixes the spinner in the viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;     /* Full viewport width */
+    height: 100vh;    /* Full viewport height */
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    // background-color: rgba(241, 112, 112, 0.5); /* Optional: semi-transparent background */
+    z-index: 9999;    /* Ensure the spinner is on top of other content */
+}
+
 /* Media Queries to disable scroll snap behavior for smaller screens */
 
 /* For tablets and smaller screens */
@@ -45,9 +59,8 @@ section {
     section {
         height: auto; /* Adjust height if needed */
     }
-    .about_section{
+    .about_section {
         background-image: linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0)), url('/public/mountains.png');
-
     }
 }
 
@@ -61,6 +74,6 @@ section {
     }
     .about_section {
         background-image: linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0)), url('/public/mountains.png');
-        // background-size:smaller;
+        /* background-size: smaller; */ /* Uncomment if needed */
     }
 }

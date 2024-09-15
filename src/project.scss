@@ -1,0 +1,695 @@
+@import 'global';
+
+  .project-head{
+    h1{
+        // margin-top: 20px;
+        text-align: center;
+        font-size: 3rem;
+        font-family: 'orangy', sans-serif;
+    }
+  }
+  $vertPad: 100px;
+  $sidePad: 170px;
+  
+  $numOfEls: 5;
+  $elMrg: 1%;
+  
+  $initAT: 1s;
+  $initDelayStep: 0.1s;
+  $fullInitAT: $initAT + $initDelayStep * ($numOfEls - 1);
+  $moveAT: 0.6s;
+  $expandAT: 0.7s;
+  $expandDelay: 0.1s;
+  $bgScaleAT: 0.8s;
+  $fadeoutAT: $moveAT + $expandAT/2;
+  $indexHoverAT: 0.5s;
+  $closeBtnAT: 0.3s;
+  $closeBtnLineDelay: 0.15s;
+  $fullExpandAT: $moveAT + $expandDelay + $expandAT;
+  $contentFadeinAT: 0.5s;
+  
+  @mixin elHover {
+    .el:hover & {
+      @content;
+    }
+  }
+  
+  @mixin elActive {
+    .el.s--active & {
+      @content;
+    }
+  }
+  
+  @mixin contInactive {
+    .cont.s--inactive & {
+      @content;
+    }
+  }
+  
+  @mixin contElActive {
+    .cont.s--el-active & {
+      @content;
+    }
+  }
+  
+  .cont {
+    // border: 2px solid red;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    padding: $vertPad $sidePad;
+  
+    &__inner {
+      position: relative;
+      height: 90%;
+      
+      &:hover .el__bg:after {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .el {
+    $elW: (100% - $elMrg * ($numOfEls - 1)) / $numOfEls;
+    $elMrgRel: percentage($elMrg / $elW);
+    // border: 2px solid magenta;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $elW;
+    height: 100%;
+    background: #252525;
+    transition: transform $moveAT $expandAT, width $expandAT, opacity $moveAT $expandAT, z-index 0s $moveAT + $expandAT;
+    will-change: transform, width, opacity;
+  
+    &:not(.s--active) {
+      cursor: pointer;
+    }
+    
+    &__overflow {
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+    }
+  
+    &__inner {
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      transition: transform $initAT;
+  
+      @include contInactive {
+        transform: translate3d(0,100%,0);
+      }
+    }
+  
+    &__bg {
+      position: relative;
+      width: calc(100vw - #{$sidePad * 2});
+      height: 100%;
+      transition: transform $moveAT $expandAT;
+      will-change: transform;
+  
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: -5%;
+        width: 100%;
+        height: 110%;
+        background-size: cover;
+        background-position: center center;
+        transition: transform $initAT;
+        transform: translate3d(0,0,0) scale(1);
+  
+        @include contInactive {
+          transform: translate3d(0,-100%,0) scale(1.2);
+        }
+  
+        @include elActive {
+          transition: transform $bgScaleAT;
+        }
+      }
+      
+      &:after {
+        $opacityAT: 0.5s;
+        
+        content: "";
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+        opacity: 0;
+        transition: opacity $opacityAT;
+        
+        @include contElActive {
+          transition: opacity $opacityAT $fullExpandAT;
+          opacity: 1 !important;
+        }
+      }
+    }
+    
+    &__preview-cont {
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s $fullInitAT - 0.2s;
+      
+      @include contInactive {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      
+      @include contElActive {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.5s;
+      }
+    }
+    
+    &__heading {
+      padding: 10px;
+      color: #fff;
+    //   text-transform: uppercase;
+      font-size: 22px;
+    }
+    
+    &__content {
+      z-index: -1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      padding: 30px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.1s;
+      
+      @include elActive {
+        z-index: 2;
+        opacity: 1;
+        pointer-events: auto;
+        transition: all $contentFadeinAT $fullExpandAT;
+      }
+    }
+    
+    &__text {
+    //   text-transform: uppercase;
+      font-size: 20px;
+      color: #fff;
+    }
+    
+    &__close-btn {
+      
+      z-index: -1;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 25px;
+      height: 25px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0s $closeBtnAT + $closeBtnLineDelay;
+      cursor: pointer;
+      
+      @include elActive {
+        z-index: 5;
+        opacity: 1;
+        pointer-events: auto;
+        transition: all 0s $fullExpandAT;
+      }
+      
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 5px;
+        margin-top: -4px;
+        background: #e8bdbd;
+        opacity: 0;
+        transition: opacity 0s;
+        
+        @include elActive {
+          opacity: 1;
+        }
+      }
+      
+      &:before {
+        transform: rotate(45deg) translateX(100%);
+        
+        @include elActive {
+          transition: all $closeBtnAT $fullExpandAT cubic-bezier(.72,.09,.32,1.57);
+          transform: rotate(45deg) translateX(0);
+        }
+      }
+      
+      &:after {
+        transform: rotate(-45deg) translateX(100%);
+        
+        @include elActive {
+          transition: all $closeBtnAT $fullExpandAT + $closeBtnLineDelay cubic-bezier(.72,.09,.32,1.57);
+          transform: rotate(-45deg) translateX(0);
+        }
+      }
+    }
+    
+    &__index {
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      bottom: $vertPad * -1;
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      text-align: center;
+      font-size: 100vw / $numOfEls;
+      line-height: 0.85;
+      font-weight: bold;
+      transition: transform $indexHoverAT, opacity $moveAT/2 $expandAT + $expandDelay + $moveAT;
+      transform: translate3d(0,1vw,0);
+      
+      @include elHover {
+        transform: translate3d(0,0,0);
+      }
+      
+      @include contElActive {
+        transition: transform $indexHoverAT, opacity $moveAT/2;
+        opacity: 0;
+      }
+      
+      &-back,
+      &-front {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      }
+     
+      &-back {
+        color: #e9abe8;
+        opacity: 0;
+        transition: opacity $indexHoverAT/2 $indexHoverAT/2;
+        
+        @include elHover {
+          transition: opacity $indexHoverAT/2;
+          opacity: 1;
+        }
+      }
+      
+      &-overlay {
+        overflow: hidden;
+        position: relative;
+        transform: translate3d(0,100%,0);
+        transition: transform $indexHoverAT 0.1s;
+        color: transparent;
+        
+        &:before {
+          content: attr(data-index);
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          color: #f2ebeb;
+          transform: translate3d(0,-100%,0);
+          transition: transform $indexHoverAT 0.1s;
+        }
+        
+        @include elHover {
+          transform: translate3d(0,0,0);
+          
+          &:before {
+            transform: translate3d(0,0,0);
+          }
+        }
+      }
+    }
+  
+    @for $i from 0 to $numOfEls {
+      &:nth-child(#{$i + 1}) {
+        $x: (100% + $elMrgRel) * $i;
+        transform: translate3d($x,0,0);
+        transform-origin: $x + 50% 50%;
+        
+        @include contElActive {
+          
+          &:not(.s--active) {
+            transform: scale(0.5) translate3d($x,0,0);
+            opacity: 0;
+            transition: transform $fadeoutAT, opacity $fadeoutAT;
+          }
+        }
+  
+        .el__inner {
+          transition-delay: $initDelayStep * $i;
+        }
+  
+        .el__bg {
+          transform: translate3d($elW * $i * -1,0,0);
+  
+          &:before {
+            transition-delay: 0.1s * $i;
+            // background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-#{$i + 3}.jpg');
+          }
+        }
+      }
+    }
+    
+    &:hover {
+      
+      .el__bg:after {
+        opacity: 0;
+      }
+    }
+  
+    &.s--active {
+      z-index: 1;
+      width: 100%;
+      transform: translate3d(0,0,0);
+      transition: transform $moveAT, width $expandAT $moveAT + $expandDelay, z-index 0s;
+  
+      .el__bg {
+        transform: translate3d(0,0,0);
+        transition: transform $moveAT;
+  
+        &:before {
+          transition-delay: $moveAT;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+  
+  .icon-link {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 32px;
+  
+    img {
+      width: 100%;
+      vertical-align: top;
+    }
+  
+    &--twitter {
+      left: auto;
+      right: 5px;
+    }
+  }
+  
+  .one{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('./public/projects/1.png');
+    background-size: cover;
+  }
+  .two{
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('./public/projects/2.png');
+    background-size: cover;
+  }
+  .three{
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('./public/projects/3.png');
+    background-size: cover;
+  }
+  .four{
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('./public/projects/4.png');
+    background-size: cover;
+  }
+  .five{
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('./public/projects/5.png');
+    background-size: cover;
+  }
+
+  .el__content{
+    background: rgba(24, 24, 24, 0.873);
+  }
+  .el__text{
+    border-radius: 50px;
+  }
+  .TechStack{
+      width: 100%;
+      height: 100%;
+      font-weight: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+    h2{
+        font-size: 2.5rem;
+       font-family: 'orangy', sans-serif; 
+        
+    }
+    ul{
+        list-style: none;
+    }
+    li{
+        font-size: 1.2rem;
+    }
+    strong{
+        color: #e9abe8;
+    }
+}
+.project-container{
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.55)), url(./pjbg.png);
+    background-size: cover;
+    height: 100%;
+}
+.project-head{
+    h1{
+        font-size: 4rem;
+        
+    }
+}
+.el{
+    margin-top: -30px;
+}
+.link-ball{
+    display: flex;
+    position: absolute;
+    right: 10px;
+    bottom:10px;
+    align-self: start;
+    .link1{
+        img{
+            z-index: 22;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    }
+    .link2{
+        img{
+            z-index: 22;
+            width: 47px;
+            height: 47px;
+            border-radius: 50%;
+            margin-top: 3px;
+        }
+    }
+}
+/* General styles for carousel */
+.slider {
+  display: none;
+}
+
+/* Media query to hide carousel on larger screens */
+@media (max-width: 768px) { /* or your breakpoint */
+  
+  .project-container{
+    .project-head{
+      h1{
+          font-size: 2.5rem;
+      }
+    }  
+      .slider {
+        
+        // border: 2px solid red;
+        margin: 20px auto;
+        padding: 30px 0;
+        display: block;
+        width: 300px;
+        text-align: center;
+        // overflow: hidden;
+        .slides {
+        display: flex;
+        
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        
+        
+        
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        
+        /*
+        scroll-snap-points-x: repeat(300px);
+        scroll-snap-type: mandatory;
+        */
+      }
+      .slides::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      .slides::-webkit-scrollbar-thumb {
+        background: rgb(242, 239, 239);
+        border-radius: 10px;
+      }
+      .slides::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .slides > div {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        width: 300px;
+        height: 300px;
+        margin-right: 50px;
+        border-radius: 10px;
+        background: rgba(91, 90, 90, 0.234);
+        // backdrop-filter: blur(202px) saturate(220%);
+        transform-origin: center center;
+        transform: scale(1);
+        transition: transform 0.5s;
+        position: relative;
+        
+        // display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        text-align: left;
+        padding: 10px;
+      }
+      .slides > div:target {
+        //  transform: scale(0.8); 
+      }
+    
+      img {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      a {
+        display: inline-flex;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #e9abe8;
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 4px;
+        margin-bottom: 20px;
+        color: #fff;
+        font-weight: 600;
+        // margin: -0.50rem 0 0.5rem 0;
+        position: relative;
+      }
+      ul{
+        list-style: none;
+        li{
+          font-size: 1rem;
+          strong{
+            color: #e9abe8;
+          }
+        }
+      }
+      
+      a:active {
+        top: 1px;
+      }
+      a:focus {
+        background: #000;
+      }
+      
+    }
+    
+    .cont, .cont.s--inactive{
+      display: none;
+    }
+
+    h3{
+      font-family: 'orangy';
+      color: orange;
+      font-size: 1.8rem;
+      text-align: center;
+      padding: 10px;
+    }
+  }
+  .link-ball{
+    // border: 2px solid magenta;
+    padding: 0;
+    margin: 0;
+    .link1{
+      
+      a{
+        width: 40px;
+        height: 40px;
+        background: none;
+        padding: 0;
+        margin: 0;
+        // border: 2px solid hotpink;
+        animation: bounce1 .4s ease-in-out infinite alternate;
+        
+      }
+    }
+    .link2{
+      a {
+        width: 40px;
+        height: 40px;
+        background: none;
+        padding: 0;
+        margin: 0;
+        // margin-bottom:5px;
+        // border: 2px solid hotpink;
+        margin-left: 5px;
+        margin-right: 3px;
+        animation: bounce2 .4s ease infinite alternate;
+        img{
+          margin: 0;
+        }
+
+        
+      }
+    }
+
+    @keyframes bounce1 {
+      0% {
+          text-shadow:
+                      0 5px 0 #ccc,
+                      0 2px 3px rgba(0, 0, 0, 0);  
+      }
+      100% {
+        transform:translateY(-5px);
+        text-shadow:  0 50px 0 #000,
+                      0 0px 20px rgba(0, 0, 0, .8);
+      }
+    }
+    @keyframes bounce2 {
+      0% {
+          text-shadow:
+                      0 5px 0 #ccc,
+                      0 2px 3px rgba(0, 0, 0, 0);  
+      }
+      100% {
+        transform:translateY(-5px);
+        text-shadow:  0 50px 0 #000,
+                      0 0px 20px rgba(0, 0, 0, .8);
+      }
+    }
+  }
+
+}

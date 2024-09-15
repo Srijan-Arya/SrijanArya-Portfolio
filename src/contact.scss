@@ -1,0 +1,130 @@
+@import 'global';
+
+.contact-container {
+    background: url('./stars.png'), url('./sun.png');
+    background-position: left;
+    background-size: contain;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    h2 {
+        padding-top: 20px;
+        text-align: center;
+        font-size: 4rem;
+        font-family: 'orangy';
+        align-self: center;  /* Center the heading on smaller screens */
+    }
+
+    .connect-btn {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap; /* Allows the buttons to wrap on smaller screens */
+
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+/* Footer styles */
+.footer {
+    position: relative;
+    width: 100%;
+    background: #3586ff;
+    min-height: 100px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    strong {
+        color: orange;
+    }
+}
+
+.footer p {
+    color: #fff;
+    margin: 15px 0 10px 0;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.wave {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url("https://i.ibb.co/wQZVxxk/wave.png");
+    background-size: 1000px 100px;
+}
+
+/* Wave animation */
+#wave1 { z-index: 1000; bottom: 0; animation: animateWaves 4s linear infinite; }
+#wave2 { z-index: 999; bottom: 10px; opacity: 0.5; animation: animateWaves 4s linear infinite; }
+#wave3 { z-index: 1000; bottom: 15px; opacity: 0.2; animation: animateWaves 3s linear infinite; }
+#wave4 { z-index: 999; bottom: 20px; opacity: 0.7; animation: animateWaves 3s linear infinite; }
+
+@keyframes animateWaves {
+    0% { background-position-x: 1000px; }
+    100% { background-position-x: 0px; }
+}
+
+/* Media Queries for Responsiveness */
+
+/* For smaller screens (mobile phones) */
+@media (max-width: 768px) {
+    .contact-container {
+        background-size: unset; /* Adjusts the background size for smaller screens */
+        height: auto;
+        
+        h2 {
+            font-size: 2.5rem; /* Reduce heading size on smaller screens */
+        }
+    
+        .connect-btn {
+            flex-direction: column; /* Stack buttons vertically */
+            padding: 25px;
+            gap: 10px;
+            
+            
+            img {
+                width: 50px;
+                height: 50px;
+                // margin-bottom: 30px; /* Add space between icons */
+            }
+        }
+    
+        .footer p {
+            font-size: 0.9rem; /* Smaller footer text on mobile */
+        }
+    }
+}
+
+/* For tablets */
+@media (max-width: 1024px) {
+    h2 {
+        font-size: 3rem;
+    }
+
+    .connect-btn {
+        img {
+            width: 70px;
+            height: 70px;
+        }
+    }
+}

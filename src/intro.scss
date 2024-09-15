@@ -120,3 +120,44 @@
         }
     }
 }
+// Media query for mobile phones (max-width: 480px)
+@media (max-width: 480px) {
+    .intro_container {
+        
+        flex-direction: column; // Stack divs vertically
+        align-items: center; // Ensure elements are centered
+        padding: 0 15px; // Add padding to prevent touching screen edges
+
+        .info, .skills {
+            width: 100%; // Full width for both sections
+            margin-bottom: 15px; // Spacing between sections
+        }
+
+        .info h2, .skills h2 {
+            font-size: 1.8rem; // Scale down heading size
+        }
+
+        .info p {
+            font-size: 1.1rem; // Scale down paragraph text
+        }
+
+        .skills img {
+            width: 40%; // Reduce image size further
+            max-width: 100%; // Ensure it doesn't overflow
+            height: auto; // Keep aspect ratio
+        }
+
+        .info button {
+            display: flex; // Ensure content stays centered inside the button
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem; // Scale down button text
+            // padding: 8px 16px; // Reduce padding
+            img {
+                width: 18px; // Reduce size of image inside the button
+                height: auto;
+                margin-right: 6px; // Space between image and text
+            }
+        }
+    }
+}

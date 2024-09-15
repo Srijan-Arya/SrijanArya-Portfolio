@@ -8,7 +8,7 @@ const vary1 = {
         }
     },
     hide:{
-        x:-400,
+        x: '-100%',  // Instead of a fixed -400px, use percentage to better handle small screens
     }
 }
 const vary2 = {
@@ -21,9 +21,10 @@ const vary2 = {
         }
     },
     hide:{
-        x:400,
+        x: '100%',  // Same here, use percentage to avoid elements moving too far off-screen
     }
 }
+
 
 const sliding_bg = {
     show:{
@@ -57,7 +58,7 @@ const Intro = () => {
                 whileInView="show"
             >
                 <motion.h2 variants={vary2}>SRIJAN ARYA</motion.h2>
-                <motion.p variants={vary2}>Web Developer <br /> UI & UX <br />Competitive Programmer (C++)</motion.p>
+                <motion.p variants={vary2}>Software Dev <br /> UI | UX <br />DSA - C++ </motion.p>
                 <motion.button><img src="./download.png" alt="" /><a href="https://drive.google.com/file/d/1LTKjAgEx7tkDDQeU9L0C3xWGZQs-kRWE/view?usp=sharing"><span>DOWNLOAD MY RESUME</span></a></motion.button>
             </motion.div>
             <motion.div 

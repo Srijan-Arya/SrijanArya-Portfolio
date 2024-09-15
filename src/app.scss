@@ -1,36 +1,66 @@
-html{
+html {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     font-family: "DM sans", sans-serif;
 }
 
-body{
+body {
     background: #0c0c1d;
     color: lightgray;
 }
 
-a{
+a {
     color: inherit;
     text-decoration: none;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-section{
+section {
     height: 100vh;
     scroll-snap-align: center;
-    
 }
 
-.landing_section{
+.landing_section {
     background-image: url("/public/stars.png");
     overflow: hidden;
 }
-.about_section{
+
+.about_section {
     background-image: url('/public/mountains.png');
     overflow: hidden;
+}
+
+/* Media Queries to disable scroll snap behavior for smaller screens */
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+    html {
+        scroll-snap-type: none;
+    }
+    section {
+        height: auto; /* Adjust height if needed */
+    }
+    .about_section{
+        background-image: linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0)), url('/public/mountains.png');
+
+    }
+}
+
+/* For mobile screens */
+@media (max-width: 480px) {
+    html {
+        scroll-snap-type: none;
+    }
+    section {
+        height: auto; /* Adjust height if needed */
+    }
+    .about_section {
+        background-image: linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0)), url('/public/mountains.png');
+        // background-size:smaller;
+    }
 }

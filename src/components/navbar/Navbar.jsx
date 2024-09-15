@@ -11,11 +11,10 @@ const Navbar = () => {
               transition={{duration:.1}}
             >
               <img src="./logo2.png" alt="" /></motion.span>
-            <div className="social">
-                <a href="#"><img src="/facebook.png" alt="" /></a>
-                <a href="#"><img src="/instagram.png" alt="" /></a>
-                <a href="#"><img src="/youtube.png" alt="" /></a>
-                <a href="#"><img src="/dribbble.png" alt="" /></a>
+            <div className="links-to-section">
+                <a href="#about">About</a>
+                <a href="#project">Projects</a>
+                <a href="#connect">Connect</a>
             </div>
         </div>
     </div>

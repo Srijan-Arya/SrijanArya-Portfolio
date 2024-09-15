@@ -28,9 +28,9 @@ const About = () => {
             <h2>Overview</h2>
             <ul>
               <li><span className="domains">Programming Proficiency:</span>  <span className="blue">C, C++</span> <span className="yellow">Python</span></li>
-              <li><span className="domains">Web Development:</span> Built robust applications using <span className="blue">React.js</span>, SQL, Vanilla HTML, CSS, JS</li>
-              <li><span className="domains">Projects:</span> Developed a Product Page Platform and a Sentiment Analysis Tool using Python</li>
-              <li><span className="domains">Problem-Solving:</span> Strong in <span className='red'>Data Structures and Algorithms</span>, active on 
+              <li><span className="domains">Web Development:</span> Built this Portfolio, didn't I?. TechStack: <span className="yellow">React.js, Framer-Motion, HTML5, SCSS, JS</span></li>
+              <li><span className="domains">Projects:</span> Developed a Product Page, Survery Page and multiple NLP based Models with Custom UI.</li>
+              <li><span className="domains">Problem-Solving:</span> <strong>Strong</strong> in <span className='red'>Data Structures and Algorithms</span>, active on 
                 <a  target="_blank" className="code360" 
                   href="https://naukri.com/code360/profile/srijanarya"
                   onMouseEnter={() => setHovering(true)}
@@ -38,7 +38,7 @@ const About = () => {
                     {hovering ? "See My Profile?" : "Coding Ninjas"}
                 </a>
               </li>
-              <li><span className='domains'>Team Player:</span> Excellent communication and teamwork skills, quick learner</li>
+              <li><span className='domains'>Team Player:</span> Excellent communication and teamwork skills, quick learner!</li>
             </ul>
             <h3>I'm eager to bring my skills to a dynamic team, aspiring for an SDE role. Let's connect and build something great!</h3>
         </div>

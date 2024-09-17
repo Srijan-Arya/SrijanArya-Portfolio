@@ -9,7 +9,7 @@ This is a sleek and responsive portfolio website built using **React** and **Vit
 - [Getting Started](#getting-started)
 
 ## Demo 🌐
-Check out the live demo of the portfolio here: [Live Demo](#https://srijanarya.netlify.app/)
+Check out the live demo of the portfolio here: https://srijanarya.netlify.app/
 
 ## Features ✨
 - **Smooth Loading Animation:** The app uses a **PacmanLoader** to display a loading screen for 3.7 seconds, simulating a clean and polished user experience.
@@ -39,7 +39,7 @@ To run the project locally, ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-portfolio.git](https://github.com/Srijan-Arya/SrijanArya-Portfolio.git
+   git clone https://github.com/Srijan-Arya/SrijanArya-Portfolio.git
    cd SrijanArya-Portfolio
    ```
 2. Install Dependencies

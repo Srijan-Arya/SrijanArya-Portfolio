@@ -1,5 +1,8 @@
 # Portfolio Project 🎨🚀
 
+![image](https://github.com/user-attachments/assets/61003ac4-5360-4b35-9521-c0b78f41b3fa)
+
+
 This is a sleek and responsive portfolio website built using **React** and **Vite**. The project is designed to showcase personal skills, projects, and a way to get in touch, all while maintaining smooth animations and minimal load times.
 
 ## Table of Contents 📑

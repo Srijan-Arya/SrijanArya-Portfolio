@@ -59,7 +59,7 @@ const Intro = () => {
             >
                 <motion.h2 variants={vary2}>SRIJAN ARYA</motion.h2>
                 <motion.p variants={vary2}>Software Dev <br /> UI | UX <br />DSA - C++ </motion.p>
-                <motion.button><img src="./download.png" alt="" /><a href="https://drive.google.com/file/d/1nXmOBLf3BmQsXTATIl5d4Xbcb4ocBY3l/view?usp=sharing"><span>DOWNLOAD MY RESUME</span></a></motion.button>
+                <motion.button><img src="./download.png" alt="" /><a href="https://drive.google.com/file/d/17X9GPjBtj4B01-AbHxh53vg_IUYZg_SD/view?usp=sharing"><span>DOWNLOAD MY RESUME</span></a></motion.button>
             </motion.div>
             <motion.div 
                 className="skills"
